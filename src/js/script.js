@@ -9,6 +9,7 @@
     },
     list: {
       listOfBooks: '.books-list',
+      singleBook: '.book',
     },
     image: {
       bookImage: '.book__image',
@@ -39,15 +40,16 @@
 
     thisBook.listOfBooks = document.querySelectorAll(select.list.listOfBooks);
     thisBook.bookImage = document.querySelector(select.image.bookImage);
+    thisBook.book = document.querySelector(select.list.singleBook);
 
-    for(let image of thisBook.listOfBooks){
-      console.log('imageLinks:', image);
+    for(let image of select.list.singleBook){
+      console.log('image:', image);
     }
 
     console.log('thisBook.listOfBooks', thisBook.listOfBooks);
     console.log('thisBook.bookImage', thisBook.bookImage);
 
-    thisBook.listOfBooks.addEventListener('dblclick', function(event){
+    thisBook.book.addEventListener('dblclick', function(event){
       console.log('event:', event);
       event.preventDefault();
       const image = event.thisBookId;
