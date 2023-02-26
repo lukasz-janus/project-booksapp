@@ -9,7 +9,7 @@
     },
     list: {
       listOfBooks: '.books-list',
-      singleBook: 'a > .book',
+      singleBook: 'a.books-list',
     },
     image: {
       bookImage: '.book__image',
@@ -35,42 +35,22 @@
   const favoriteBooks = [];
 
   function initActions(){
-    const thisBook = this;
-  
-    thisBook.listOfBooks = document.querySelector(select.list.listOfBooks);
-    thisBook.bookImage = document.querySelector(select.image.bookImage);
-    thisBook.book = document.querySelectorAll(select.list.singleBook);
+    const booksPanel = document.querySelector(select.list.listOfBooks);
+    const bookImage = document.querySelector(select.image.bookImage);
+    const book = booksPanel.querySelector(select.list.singleBook);
 
-    for(let image in thisBook.book){
-      console.log('thisBook.book:', thisBook.book);
-      thisBook.book.addEventListener('dblclick', function(event){
-        event.preventDefault();
-        console.log('image cliked');
-        favoriteBooks.push(image);
-      });
-      console.log('image');
-    }
+    console.log('thisBook.book:', book);
 
-    console.log('thisBook.listOfBooks', thisBook.listOfBooks);
-    console.log('thisBook.bookImage', thisBook.bookImage);
+    book.addEventListener('dblclick', function(event){
+      event.preventDefault();
+      console.log('image cliked', event.target);
+      book.classList.add('favorite');
+      // favoriteBooks.push(image);
+    });
+    console.log('image');
 
-    // thisBook.book.addEventListener('dblclick', function(event){
-    //   console.log('event:', event);
-    //   event.preventDefault();
-    //   const image = event.thisBookId;
-    //   console.log('listOfBooks where is..', thisBook.listOfBooks);
-    //   favoriteBooks.push(image);
-    // });
-    
     console.log('favoriteBooks', favoriteBooks);
-    //   for(let image of imageLink){
-    //   thisInitActions.imageLink.addEventListener('dblclick', function(event){
-    //     event.preventDefault();
-    //  console.log('initActions', thisBookId);
-    // });
-    // }   
-    // }      
-  
+
   }
   initActions();
 }
