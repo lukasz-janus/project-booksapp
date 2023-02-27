@@ -9,7 +9,7 @@
     },
     list: {
       listOfBooks: '.books-list',
-      singleBook: 'a.books-list',
+      singleBook: '.book__image',
     },
     image: {
       bookImage: '.book__image',
@@ -17,12 +17,12 @@
     },
   };
 
-  const templates = {
+  const templates = { 
     books: Handlebars.compile(document.querySelector(select.templateOf.bookList).innerHTML),
   };
 
   function render(){
-    for(let book of dataSource.books){
+    for(const book of dataSource.books){
       const generatedHTML = templates.books(book);
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       const booksPanel = document.querySelector(select.list.listOfBooks);
@@ -37,17 +37,24 @@
   function initActions(){
     const booksPanel = document.querySelector(select.list.listOfBooks);
     const bookImage = document.querySelector(select.image.bookImage);
-    const book = booksPanel.querySelector(select.list.singleBook);
+    const book = booksPanel.querySelectorAll(select.list.singleBook);
 
-    console.log('thisBook.book:', book);
+    console.log('select.list.singleBook:', select.list.singleBook);
+    console.log('book:', book);
 
-    book.addEventListener('dblclick', function(event){
-      event.preventDefault();
-      console.log('image cliked', event.target);
-      book.classList.add('favorite');
+    favoriteBooks.push(book);
+
+    for(let b of favoriteBooks){  
+      booksPanel.addEventListener('dblclick', function(event){
+        event.preventDefault();
+        console.log('image cliked', event.target);
+        event.target.classList.add('favorite');
       // favoriteBooks.push(image);
-    });
-    console.log('image');
+      });
+      console.log('image');
+      console.log('b:', b);
+    }
+    
 
     console.log('favoriteBooks', favoriteBooks);
 
